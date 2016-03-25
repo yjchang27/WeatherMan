@@ -21,6 +21,10 @@ android {
     }
 }
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -28,8 +32,13 @@ dependencies {
     // link androidannotations as dependency
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
+
+    // design modules
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
+
+    // dark-sky api
+    compile 'com.github.johnhiott:DarkSkyApi:v0.1.4'
 }
 
 apt {
