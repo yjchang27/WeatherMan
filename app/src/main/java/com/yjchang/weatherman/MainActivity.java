@@ -1,12 +1,14 @@
 package com.yjchang.weatherman;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.UiThread;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.VideoView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Bean;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
+
+    @ViewById(R.id.weather_anim)
+    VideoView weatherVideo;
 
     @AfterInject
     void initObject() {
@@ -39,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public void setWeather(String forecast) {
         Snackbar.make(this.findViewById(R.id.fab), forecast, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+        weatherVideo.setVideoURI(Uri.parse("android.resource://" + getPackageName()
+                                           + "/" + R.raw.sunny));
+        weatherVideo.start();
     }
 
 }
