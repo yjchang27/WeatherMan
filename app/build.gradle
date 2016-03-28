@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.yjchang.weatherman"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,9 @@ dependencies {
 
     // dark-sky api
     compile 'com.github.johnhiott:DarkSkyApi:v0.1.4'
+
+    // Google API
+    compile 'com.google.android.gms:play-services-location:8.4.0'
 }
 
 apt {
