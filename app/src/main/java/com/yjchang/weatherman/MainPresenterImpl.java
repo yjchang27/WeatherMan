@@ -67,10 +67,11 @@ public class MainPresenterImpl implements MainPresenter {
         view.setIcon(getWeatherIconResId(weatherResponse.getCurrently().getIcon()));
 
         String forecast = "";
-        forecast += model.getLocality(model.getLocation()) + "\n\n";
-        forecast += weatherResponse.getCurrently().getSummary() + "\n\n";
-        forecast += weatherResponse.getHourly().getSummary() + "\n\n";
-        forecast += weatherResponse.getDaily().getSummary() + "\n\n";
+        forecast += "City: " + model.getLocality(model.getLocation()) + "\n\n";
+        forecast += "Now: " + weatherResponse.getCurrently().getSummary() +
+                " (rain% : " + weatherResponse.getCurrently().getPrecipProbability() + ")\n\n";
+        forecast += "Today: " + weatherResponse.getHourly().getSummary() + "\n\n";
+        forecast += "This Week: " + weatherResponse.getDaily().getSummary() + "\n\n";
 
         forecast += "--------------------\n\n";
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
