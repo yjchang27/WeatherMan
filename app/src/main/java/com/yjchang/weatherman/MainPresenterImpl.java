@@ -52,6 +52,7 @@ public class MainPresenterImpl implements MainPresenter {
             @Override
             public void success(WeatherResponse weatherResponse, Response response) {
                 updateForecast(weatherResponse);
+                view.makeSnackbar("Updated", "Action", null);
             }
 
             @Override

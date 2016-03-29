@@ -72,12 +72,13 @@ public class WeatherModelImpl implements WeatherModel, GoogleApiClient.Connectio
 
     @Override
     public void onConnectionSuspended(int i) {
+        presenter.notifyError("Connection to Google API suspended");
         Log.d(TAG, "Google Api Connection Suspended");
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        presenter.notifyError("Failed connecting to Google API");
+        presenter.notifyError("Unable to connect Google API");
         Log.d(TAG, "Google Api Connection Failed");
     }
 
@@ -125,39 +126,5 @@ public class WeatherModelImpl implements WeatherModel, GoogleApiClient.Connectio
             presenter.notifyError("Failed retrieving location");
             Log.d(TAG, "FAILED RETRIEVING LOCATION");
         }
-    }
-
-    public void testAPI() {
-        RequestBuilder weather = new RequestBuilder();
-
-        Request request = new Request();
-        request.setLat(String.valueOf(getLocation().latitude));
-        request.setLng(String.valueOf(getLocation().longitude));
-        request.setUnits(Request.Units.SI);
-        request.setLanguage(Request.Language.ENGLISH);
-
-        weather.getWeather(request, new Callback<WeatherResponse>() {
-            @Override
-            public void success(WeatherResponse weatherResponse, Response response) {
-                try {
-                    String addr = mGeocoder.getFromLocation(getLocation().latitude,
-                            getLocation().longitude, 1).get(0).getLocality();
-                    Log.d(TAG, "Address: " + addr);
-                    Log.d(TAG, "Location: " + getLocation().toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                Log.d(TAG, "Temp: " + weatherResponse.getCurrently().getTemperature());
-                Log.d(TAG, "Summary: " + weatherResponse.getCurrently().getSummary());
-                Log.d(TAG, "Hourly Sum: " + weatherResponse.getHourly().getSummary());
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {
-                Log.d(TAG, "Error while calling: " + retrofitError.getUrl());
-                Log.d(TAG, retrofitError.toString());
-            }
-        });
     }
 }
